@@ -103,6 +103,5 @@ class Module:
             script += " -Password "+password
         if instance != "" and not check_all:
             script += " -Instance "+instance
-	print script
 
         return script
