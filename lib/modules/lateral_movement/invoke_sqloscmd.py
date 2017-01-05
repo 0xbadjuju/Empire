@@ -11,6 +11,7 @@ class Module:
             'NeedsAdmin' : False,
             'OpsecSafe' : True,
             'Language' : 'powershell',
+			'MinPSVersion' : '2',
             'MinLanguageVersion' : '2',
             
             'Comments': []
@@ -123,7 +124,7 @@ class Module:
 
 		script += "Invoke-SQLOSCmd -Instance \"%s\" -Command \"%s\"" % (instance, command)  
 
-		if username != "":
+        if username != "":
             script += " -UserName "+username
         if password != "":
 		    script += " -Password "+password
