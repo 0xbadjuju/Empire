@@ -5,28 +5,22 @@ class Module:
     def __init__(self, mainMenu, params=[]):
 
         self.info = {
-            'Name': 'Get-SQLInstanceDomain',
-
+            'Name' : 'Get-SQLInstanceDomain',
             'Author': ['@_nullbind', '@0xbadjuju'],
-
             'Description': ('Returns a list of SQL Server instances discovered by querying '
                             'a domain controller for systems with registered MSSQL service '
                             'principal names. The function will default to the current user\'s ' 
                             'domain and logon server, but an alternative domain controller '
                             'can be provided. UDP scanning of management servers is optional.'),
-
             'Background' : True,
-
             'OutputExtension' : None,
-            
+			
             'NeedsAdmin' : False,
-
             'OpsecSafe' : True,
-            
             'Language' : 'powershell',
-
+			'MinPSVersion' : '2',
             'MinLanguageVersion' : '2',
-            
+			
             'Comments': [
                 'https://github.com/NetSPI/PowerUpSQL/blob/master/PowerUpSQL.ps1'
             ]

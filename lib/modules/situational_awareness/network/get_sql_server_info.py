@@ -6,21 +6,15 @@ class Module:
 
         self.info = {
             'Name': 'Get-SQLServerInfo',
-
             'Author': ['@_nullbind', '@0xbadjuju'],
-
             'Description': ('Returns basic server and user information from target SQL Servers.'),
-
             'Background' : True,
-
             'OutputExtension' : None,
-            
+			
             'NeedsAdmin' : False,
-
             'OpsecSafe' : True,
-            
             'Language' : 'powershell',
-
+			'MinPSVersion' : '2',
             'MinLanguageVersion' : '2',
             
             'Comments': [
