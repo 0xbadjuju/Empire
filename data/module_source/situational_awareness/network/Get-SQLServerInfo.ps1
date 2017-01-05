@@ -172,20 +172,20 @@ Function  Get-SQLSession {
             if ($NewSid) {
                 $NewSid = [System.BitConverter]::ToString($_.PrincipalSid).Replace('-','')
                 if ($NewSid.length -le 10) {
-                    $Sid = [Convert]::ToInt32($NewSid,16)
+    $Sid = [Convert]::ToInt32($NewSid,16)
                 } else {
-                    $Sid = $NewSid
+    $Sid = $NewSid
                 }
                 $null = $TblSessions.Rows.Add(
-                    [string]$_.ComputerName,
-                    [string]$_.Instance,
-                    $Sid,
-                    [string]$_.PrincipalName,
-                    [string]$_.OriginalPrincipalName,
-                    [string]$_.SessionId,
-                    [string]$_.SessionStartTime,
-                    [string]$_.SessionLoginTime,
-                    [string]$_.SessionStatus)
+    [string]$_.ComputerName,
+    [string]$_.Instance,
+    $Sid,
+    [string]$_.PrincipalName,
+    [string]$_.OriginalPrincipalName,
+    [string]$_.SessionId,
+    [string]$_.SessionStartTime,
+    [string]$_.SessionLoginTime,
+    [string]$_.SessionStatus)
             }
         }
     } End {
@@ -276,11 +276,11 @@ Function Get-SQLQuery {
             $Connection.Open()
             $Command = New-Object -TypeName System.Data.SqlClient.SqlCommand -ArgumentList ($Query, $Connection)
             try {
-                $Results = $Command.ExecuteReader()                                             
+                $Results = $Command.ExecuteReader()             
                 $TblQueryResults.Load($Results)  
             } catch {
                 # pass
-            }                                                                                    
+            }                    
             $Connection.Close()
             $Connection.Dispose() 
         }
@@ -291,7 +291,7 @@ Function Get-SQLQuery {
     }
 }
 
-Function Get-SQLServerInfo {
+Function Get-SQLServerInfo2 {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -399,7 +399,29 @@ Function Get-SQLServerInfo {
         '$ActiveSessions' as [ActiveSessions]"
         $TblServerInfoTemp = Get-SQLQuery -Instance $Instance -Query $Query -Username $Username -Password $Password
         $TblServerInfo = $TblServerInfo + $TblServerInfoTemp
-	$TblServerInfo
+        ForEach ($Row in $TblServerInfo) {
+            "ComputerName           : " + $Row.ComputerName + "`n"
+            "Instance               : " + $Row.Instance + "`n"
+            "DomainName             : " + $Row.DomainName + "`n"
+            "ServiceName            : " + $Row.ServiceName + "`n"
+            "ServiceAccount         : " + $Row.ServiceAccount + "`n"
+            "AuthenticationMode     : " + $Row.AuthenticationMode + "`n"
+            "Clustered              : " + $Row.Clustered + "`n"
+            "SQLServerVersionNumber : " + $Row.SQLServerVersionNumber + "`n"
+            "SQLServerMajorVersion  : " + $Row.SQLServerMajorVersion + "`n"
+            "SQLServerEdition       : " + $Row.SQLServerEdition + "`n"
+            "SQLServerServicePack   : " + $Row.SQLServerServicePack + "`n"
+            "OSArchitecture         : " + $Row.OSArchitecture + "`n"
+            "OsMachineType          : " + $Row.OsMachineType + "`n"
+            "OSVersionName          : " + $Row.OSVersionName + "`n"
+            "OsVersionNumber        : " + $Row.OsVersionNumber + "`n"
+            "Currentlogin           : " + $Row.Currentlogin + "`n"
+            "IsSysadmin             : " + $Row.IsSysadmin + "`n"
+            "ActiveSessions         : " + $Row.ActiveSessions + "`n"
+            "`n"
+            }
+
+	    $TblServerInfo
     } End {
     }
 }

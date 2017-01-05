@@ -237,6 +237,18 @@ Function  Get-SQLInstanceDomain {
         } else {
             $InstanceCount = $TblSQLServerSpns.rows.count
             "$InstanceCount instances were found."
+            ForEach ($Row in $TblSQLServerSpns) {
+                "ComputerName     : " + $Row.ComputerName + "`n"
+                "Instance         : " + $Row.Instance + "`n"
+                "DomainAccountSid : " + $Row.DomainAccountSid + "`n"
+                "DomainAccount    : " + $Row.DomainAccount + "`n"
+                "DomainAccountCn  : " + $Row.DomainAccountCn + "`n"
+                "Service          : " + $Row.Service + "`n"
+                "Spn              : " + $Row.Spn + "`n"
+                "LastLogon        : " + $Row.LastLogon + "`n"
+                "Description      : " + $Row.Description + "`n"
+                "`n"
+            }
             $TblSQLServerSpns
         }
     }
