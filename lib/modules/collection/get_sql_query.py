@@ -6,21 +6,15 @@ class Module:
 
         self.info = {
             'Name': 'Get-SQLQuery',
-
             'Author': ['@_nullbind', '@0xbadjuju'],
-
             'Description': ('Executes a query on target SQL servers.'),
-
             'Background' : True,
-
             'OutputExtension' : None,
             
             'NeedsAdmin' : False,
-
             'OpsecSafe' : True,
-            
             'Language' : 'powershell',
-
+			'MinPSVersion' : '2',
             'MinLanguageVersion' : '2',
             
             'Comments': [

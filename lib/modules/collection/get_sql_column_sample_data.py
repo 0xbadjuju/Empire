@@ -6,23 +6,17 @@ class Module:
 
         self.info = {
             'Name': 'Get-SQLColumnSampleData',
-
             'Author': ['@_nullbind', '@0xbadjuju'],
-
             'Description': ('Returns column information from target SQL Servers. Supports '
                             'search by keywords, sampling data, and validating credit card '
                             'numbers.'),
-
             'Background' : True,
-
             'OutputExtension' : None,
             
             'NeedsAdmin' : False,
-
             'OpsecSafe' : True,
-            
             'Language' : 'powershell',
-
+            'MinPSVersion' : '2',	
             'MinLanguageVersion' : '2',
             
             'Comments': [
