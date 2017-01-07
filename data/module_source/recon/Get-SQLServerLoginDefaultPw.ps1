@@ -549,15 +549,15 @@ Function  Get-SQLServerLoginDefaultPw {
 
         # Bypass ports and default instances
         if (-not $TargetInstance) {
-            "$Instance : No instance match found."
+            "$Instance : No instance match found. `n"
             return
         }
         $TblResultsTemp = $DefaultPasswords | Where-Object { $_.instance -eq "$TargetInstance"}        
 
         if ($TblResultsTemp) {
-            "$Instance : Confirmed instance match."            
+            "$Instance : Confirmed instance match. `n"            
         } else {
-            "$Instance : No instance match found."
+            "$Instance : No instance match found. `n"
             return  
         }
         $CurrentUsername = $TblResultsTemp.username
@@ -574,7 +574,7 @@ Function  Get-SQLServerLoginDefaultPw {
                 $SysadminStatus
             ) | Out-Null
         } else {
-            "$Instance : No credential matches were found."
+            "$Instance : No credential matches were found. `n"
         }
     } End {
         ForEach ($Result in $TblResults) {
