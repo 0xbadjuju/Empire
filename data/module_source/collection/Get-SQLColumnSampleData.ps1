@@ -912,7 +912,7 @@ Function Get-SQLColumnSampleData {
         } else {
                 "$Instance : - No columns were found that matched the search. `n"
         }
-        "$Instance : END SEARCH DATA BY COLUMN `n"
+        "$Instance : END SEARCH DATA BY COLUMN `n`n"
     } End {
         ForEach ($Row in $TblData) {
             "ComputerName : " + $Row.ComputerName + "`n"
