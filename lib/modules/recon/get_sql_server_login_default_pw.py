@@ -57,7 +57,7 @@ class Module:
         check_all = self.options['CheckAll']['Value']
 
         # read in the common module source code
-        moduleSource = self.mainMenu.installPath + "data/module_source/collection/Get-SQLColumnSampleData.ps1"
+        moduleSource = self.mainMenu.installPath + "data/module_source/recon/Get-SQLServerLoginDefaultPw.ps1"
         script = ""
         try:
             with open(moduleSource, 'r') as source:

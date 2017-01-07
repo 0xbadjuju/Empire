@@ -1,4 +1,4 @@
-﻿Function Get-ComputerNameFromInstance {
+Function Get-ComputerNameFromInstance {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
