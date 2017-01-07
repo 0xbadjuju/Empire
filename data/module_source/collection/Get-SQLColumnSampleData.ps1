@@ -877,9 +877,9 @@ Function Get-SQLColumnSampleData {
             "$Instance : CONNECTION FAILED"
             Return
         } else {
-            "$Instance : START SEARCH DATA BY COLUMN"
-            "$Instance : - Connection Success."
-            "$Instance : - Searching for column names that match criteria..."
+            "$Instance : START SEARCH DATA BY COLUMN `n"
+            "$Instance : - Connection Success. `n"
+            "$Instance : - Searching for column names that match criteria... `n"
             if($NoDefaults) {
                 $Columns = Get-SQLColumn -Instance $Instance -Username $Username -Password $Password -DatabaseName $DatabaseName -ColumnNameSearch $Keywords -NoDefaults
             } else {
@@ -898,9 +898,9 @@ Function Get-SQLColumnSampleData {
                 $Query = "USE $sDatabaseName; SELECT TOP $SampleSize [$sColumnName] FROM $AffectedTable WHERE [$sColumnName] is not null"
                 $QueryRowCount = "USE $sDatabaseName; SELECT count(CAST([$sColumnName] as VARCHAR(200))) as NumRows FROM $AffectedTable WHERE [$sColumnName] is not null"
                 
-                "$Instance : - Table match: $AffectedTable"
-                "$Instance : - Column match: $AffectedColumn"
-                "$Instance : - Selecting $SampleSize rows of data sample from column $AffectedColumn."
+                "$Instance : - Table match: $AffectedTable `n"
+                "$Instance : - Column match: $AffectedColumn `n"
+                "$Instance : - Selecting $SampleSize rows of data sample from column $AffectedColumn. `n"
 
                 $RowCountOut = Get-SQLQuery -Instance $Instance -Username $Username -Password $Password -Query $QueryRowCount 
                 $RowCount = $RowCountOut.NumRows
@@ -910,10 +910,20 @@ Function Get-SQLColumnSampleData {
                 }
             }
         } else {
-                "$Instance : - No columns were found that matched the search."
+                "$Instance : - No columns were found that matched the search. `n"
         }
-        "$Instance : END SEARCH DATA BY COLUMN"
+        "$Instance : END SEARCH DATA BY COLUMN `n"
     } End {
-        $TblData
+        ForEach ($Row in $TblData) {
+            "ComputerName : " + $Row.ComputerName + "`n"
+            "Instance     : " + $Row.Instance + "`n"
+            "Database     : " + $Row.Database + "`n"
+            "Schema       : " + $Row.Schema + "`n"
+            "Table        : " + $Row.Table + "`n"
+            "Column       : " + $Row.Column + "`n"
+            "Sample       : " + $Row.Sample + "`n"
+            "RowCount     : " + $Row.RowCount + "`n"
+            "`n"
+        }
     }
 }
