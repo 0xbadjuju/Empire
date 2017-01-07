@@ -94,7 +94,7 @@ Function Get-SQLQuery {
         $Instance = $ConnectionString.split(';')[0].split('=')[1]
         if($Query) {
             $Connection.Open()
-            "$Instance : Connection Success."
+            "$Instance : Connection Success.`n"
             $Command = New-Object -TypeName System.Data.SqlClient.SqlCommand -ArgumentList ($Query, $Connection)
             try {
                 $Results = $Command.ExecuteReader()                                             
@@ -108,6 +108,6 @@ Function Get-SQLQuery {
         else{'No query provided to Get-SQLQuery function.';Break}
     } End {   
         if($ReturnError){$ErrorMessage}
-        else{$TblQueryResults}                  
+        else{$TblQueryResults.Column1}                  
     }
 }
