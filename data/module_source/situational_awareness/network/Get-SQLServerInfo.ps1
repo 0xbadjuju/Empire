@@ -291,7 +291,7 @@ Function Get-SQLQuery {
     }
 }
 
-Function Get-SQLServerInfo2 {
+Function Get-SQLServerInfo {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $false,
@@ -416,12 +416,11 @@ Function Get-SQLServerInfo2 {
             "OSVersionName          : " + $Row.OSVersionName + "`n"
             "OsVersionNumber        : " + $Row.OsVersionNumber + "`n"
             "Currentlogin           : " + $Row.Currentlogin + "`n"
-            "IsSysadmin             : " + $Row.IsSysadmin + "`n"
+            "IsSysadmin             : " + $IsSysadmin.IsSysadmin + "`n"
             "ActiveSessions         : " + $Row.ActiveSessions + "`n"
             "`n"
-            }
+        }
 
-	    $TblServerInfo
     } End {
     }
 }
