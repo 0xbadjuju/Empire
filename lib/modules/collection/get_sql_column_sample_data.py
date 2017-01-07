@@ -108,5 +108,4 @@ class Module:
             script += " -Instance "+instance
         if no_defaults:
             script += " -NoDefaults "
-        print script
         return script
