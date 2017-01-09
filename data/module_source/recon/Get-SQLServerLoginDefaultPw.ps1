@@ -564,7 +564,7 @@ Function  Get-SQLServerLoginDefaultPw {
         $CurrentPassword = $TblResultsTemp.password
         $LoginTest = Get-SQLServerInfo -Instance $instance -Username $CurrentUsername -Password $CurrentPassword -SuppressVerbose
         if ($LoginTest) {
-            "$Instance : Confirmed default credentials - $CurrentUsername/$CurrentPassword `n"
+            "$Instance : Confirmed default credentials - $CurrentUsername/$CurrentPassword `n`n"
             $SysadminStatus = $LoginTest | select IsSysadmin -ExpandProperty IsSysadmin                   
             $TblResults.Rows.Add(
                 $ComputerName,
