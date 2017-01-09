@@ -33,6 +33,16 @@ class Module:
                 'Required'      :   True,
                 'Value'         :   ''
             },
+			'Username' : {
+                'Description'   :   'SQL Server or domain account to authenticate with. Only used for CheckAll',
+                'Required'      :   False,
+                'Value'         :   ''
+            },
+            'Password' : {
+                'Description'   :   'SQL Server or domain account password to authenticate with. Only used for CheckAll',
+                'Required'      :   False,
+                'Value'         :   ''
+            },
             'Instance' : {
                 'Description'   :   'SQL Server instance to connection to.',
                 'Required'      :   False,
@@ -53,6 +63,8 @@ class Module:
                 self.options[option]['Value'] = value
 
     def generate(self):
+		username = self.options['Username']['Value']
+        password = self.options['Password']['Value']
         instance = self.options['Instance']['Value']
         check_all = self.options['CheckAll']['Value']
 
