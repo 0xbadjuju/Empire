@@ -63,7 +63,7 @@ class Module:
                 self.options[option]['Value'] = value
 
     def generate(self):
-		username = self.options['Username']['Value']
+        username = self.options['Username']['Value']
         password = self.options['Password']['Value']
         instance = self.options['Instance']['Value']
         check_all = self.options['CheckAll']['Value']
