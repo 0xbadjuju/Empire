@@ -5,7 +5,7 @@ class Module:
             'Name': 'Invoke-SQLOSCMD',
             'Author': ['@nullbind', '@0xbadjuju'],
             'Description': ('Executes a command or stager on remote hosts using xp_cmdshell.'),
-            'Background' : False,
+            'Background' : True,
             'OutputExtension' : None,
             
             'NeedsAdmin' : False,
