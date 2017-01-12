@@ -15,12 +15,12 @@ class Module:
             'NeedsAdmin' : False,
             'OpsecSafe' : True,
             'Language' : 'powershell',
-            'MinPSVersion' : '2',	
+            'MinPSVersion' : '2',    
             'MinLanguageVersion' : '2',
             
             'Comments': [
                 'https://github.com/NetSPI/PowerUpSQL/blob/master/PowerUpSQL.ps1',
-				'https://github.com/pwnwiki/pwnwiki.github.io/blob/master/tech/db/mssql.md'
+                'https://github.com/pwnwiki/pwnwiki.github.io/blob/master/tech/db/mssql.md'
             ]
         }
 
@@ -33,7 +33,7 @@ class Module:
                 'Required'      :   True,
                 'Value'         :   ''
             },
-			'Username' : {
+            'Username' : {
                 'Description'   :   'SQL Server or domain account to authenticate with. Only used for CheckAll',
                 'Required'      :   False,
                 'Value'         :   ''
